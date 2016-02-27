@@ -18,11 +18,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # template_dir_string  = sys.argv[0] + r'\templates\blog'
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
-STATIC_PATH = os.path.join(BASE_DIR, 'static')
+#STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
+STATIC_ROOT = '/var/www/weixiang/mysite/blog/static/'
+#STATICFILES_DIRS = (
+#    STATIC_PATH,
+#)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
