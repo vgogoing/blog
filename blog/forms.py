@@ -1,5 +1,5 @@
 from django import forms
-from models import Page, Category
+from models import Page, Category, Userpro, User
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text='raw_put category name')
@@ -29,3 +29,17 @@ class PageForm(forms.ModelForm):
     class Meta:
         model = Page
         exclude = ('category',)  #or fields = ('titles', 'views', 'url')  to show
+
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, help_text='password')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+class UserproForm(forms.ModelForm):
+    class Meta:
+        model = Userpro
+        fileds = ('website', 'picture')
+

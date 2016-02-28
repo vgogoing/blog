@@ -8,6 +8,7 @@ urlpatterns = patterns('',
                        url(r'^category/(?P<category_name_slug>[\w\-]+)/$', blog_views.category, name='category'),
                        url(r'^add_category/', blog_views.add_category, name='add_category'),
                        url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/', blog_views.add_page, name='add_page'),
+                       url(r'^register/$', blog_views.register, name='register')
                        )
 
 

@@ -1,5 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -24,5 +26,18 @@ class Page(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+
+class Userpro(models.Model):
+    user = models.OneToOneField(User)
+    picture = models.ImageField(upload_to='userpro_files', blank=True)# project/media/userpro_files
+    website = models.URLField(blank=True)
+    login_time = models.DateField(auto_now_add=True)  #auto_now=True  save() willdone
+    # last_login_time = models.DateField(default=datetime.now, blank=True)
+
+    def __unicode__(self):
+        return self.user.username
+
 
 

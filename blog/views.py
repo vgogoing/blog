@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from models import Category, Page
-from forms import CategoryForm, PageForm
+from forms import CategoryForm, PageForm, UserForm, UserproForm
 # Create your views here.
 
 
@@ -78,6 +78,37 @@ def add_page(request, category_name_slug):
     context_dic = {'form': form, 'category': cat, 'slug': category_name_slug}
     print context_dic
     return render(request, 'blog/add_page.html', context_dic)
+
+def register(request):
+
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        userpro_form = UserproForm(data=request.POST)
+        if user_form.is_valid() and userpro_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = userpro_form.save(commit=False)
+            profile.user = user
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            profile.save()
+
+            registered = True
+
+        else:
+            print userpro_form.errors, userpro_form.errors
+
+    else:
+        user_form = UserForm()
+        userpro_form = UserproForm()
+
+    context_dic = {'user_form': user_form, 'userpro_form': userpro_form, 'registered': registered}
+    return render(request, 'blog/register.html', context_dic)
+
+
+
 
 
 
